@@ -1,0 +1,102 @@
+{
+  "tracks" : [ 
+      {
+    "album" : {
+      "album_group" : "ALBUM",
+      "album_type" : "ALBUM",
+      "artists" : [ {
+        "external_urls" : {
+          "spotify" : "https://open.spotify.com/artist/5zyNXVd952fWOjkdGHCvPd"
+        },
+        "href" : "https://api.spotify.com/v1/artists/5zyNXVd952fWOjkdGHCvPd",
+        "id" : "5zyNXVd952fWOjkdGHCvPd",
+        "name" : "Béla Bartók",
+        "type" : "artist",
+        "uri" : "spotify:artist:5zyNXVd952fWOjkdGHCvPd"
+      }, {
+        "external_urls" : {
+          "spotify" : "https://open.spotify.com/artist/0lluGWFB8hZ6HFktcH6kkr"
+        },
+        "href" : "https://api.spotify.com/v1/artists/0lluGWFB8hZ6HFktcH6kkr",
+        "id" : "0lluGWFB8hZ6HFktcH6kkr",
+        "name" : "Marin Alsop",
+        "type" : "artist",
+        "uri" : "spotify:artist:0lluGWFB8hZ6HFktcH6kkr"
+      } ],
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/album/64MsB6EwcyTJi2eg7EpFMl"
+      },
+      "href" : "https://api.spotify.com/v1/albums/64MsB6EwcyTJi2eg7EpFMl",
+      "id" : "64MsB6EwcyTJi2eg7EpFMl",
+      "images" : [ {
+        "height" : 640,
+        "url" : "https://i.scdn.co/image/ab67616d0000b27397766a30a45c565f8efa8e78",
+        "width" : 640
+      }, {
+        "height" : 300,
+        "url" : "https://i.scdn.co/image/ab67616d00001e0297766a30a45c565f8efa8e78",
+        "width" : 300
+      }, {
+        "height" : 64,
+        "url" : "https://i.scdn.co/image/ab67616d0000485197766a30a45c565f8efa8e78",
+        "width" : 64
+      } ],
+      "is_playable" : true,
+      "name" : "Bartók: Concerto for Orchestra - Music for Strings, Percussion & Celesta",
+      "release_date" : "2012-05-01",
+      "release_date_precision" : "day",
+      "total_tracks" : 9,
+      "type" : "album",
+      "uri" : "spotify:album:64MsB6EwcyTJi2eg7EpFMl"
+    },
+    "artists" : [ 
+        {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/5zyNXVd952fWOjkdGHCvPd"
+      },
+      "href" : "https://api.spotify.com/v1/artists/5zyNXVd952fWOjkdGHCvPd",
+      "id" : "5zyNXVd952fWOjkdGHCvPd",
+      "name" : "Béla Bartók",
+      "type" : "artist",
+      "uri" : "spotify:artist:5zyNXVd952fWOjkdGHCvPd"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/1w77QW6t2p7zrCEbgwk256"
+      },
+      "href" : "https://api.spotify.com/v1/artists/1w77QW6t2p7zrCEbgwk256",
+      "id" : "1w77QW6t2p7zrCEbgwk256",
+      "name" : "Baltimore Symphony Orchestra",
+      "type" : "artist",
+      "uri" : "spotify:artist:1w77QW6t2p7zrCEbgwk256"
+    }, {
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/artist/0lluGWFB8hZ6HFktcH6kkr"
+      },
+      "href" : "https://api.spotify.com/v1/artists/0lluGWFB8hZ6HFktcH6kkr",
+      "id" : "0lluGWFB8hZ6HFktcH6kkr",
+      "name" : "Marin Alsop",
+      "type" : "artist",
+      "uri" : "spotify:artist:0lluGWFB8hZ6HFktcH6kkr"
+    } ],
+    "disc_number" : 1,
+    "duration_ms" : 594453,
+    "explicit" : false,
+    "external_ids" : {
+      "isrc" : "HKI191143301"
+    },
+    "external_urls" : {
+      "spotify" : "https://open.spotify.com/track/0HFjkbNO3zNliDAfQf61th"
+    },
+    "href" : "https://api.spotify.com/v1/tracks/0HFjkbNO3zNliDAfQf61th",
+    "id" : "0HFjkbNO3zNliDAfQf61th",
+    "is_local" : false,
+    "is_playable" : true,
+    "name" : "Concerto for Orchestra, BB 123: I. Introduzione: Andante non troppo - Allegro vivace",
+    "popularity" : 6,
+    "preview_url" : "https://p.scdn.co/mp3-preview/fd20d75c2071a4a703c415039b9b9f6a9f28d63e?cid=7604db9d870b4c6eb2a3636e05e8c0a8",
+    "track_number" : 1,
+    "type" : "track",
+    "uri" : "spotify:track:0HFjkbNO3zNliDAfQf61th"
+  }
+  ]
+}
