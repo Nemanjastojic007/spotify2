@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:spotify2/AppState.dart';
+import 'package:spotify2/Pages/SearchPage.dart';
 import 'package:spotify_sdk/spotify_sdk.dart';
 import 'package:spotify2/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:spotify2/models/User.dart';
 import 'dart:convert';
+import 'package:spotify2/models/Track.dart';
 
 class HomePage extends StatefulWidget {
   HomePage();
@@ -14,66 +18,78 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String? token;
-  User? user;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    init();
+    var appState = context.read<AppState>();
+
+    init(appState);
   }
 
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<AppState>();
+    var user = appState.user;
+    var tracks = appState.tracks;
+
     return Scaffold(
       appBar: AppBar(
-          title: Text(user == null ? "Placeholder" : user!.display_name)),
-      body: Center(child: Container()),
+        title: Text(
+          user == null ? "Placeholder" : user!.display_name,
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return SearchPage();
+                }));
+              },
+              icon: Icon(Icons.search))
+        ],
+      ),
+      body: Column(
+        children: [
+          Expanded(child: Container()),
+          StreamBuilder(
+              stream: SpotifySdk.subscribePlayerState(),
+              builder: (context, snapshot) {
+                bool paused = false;
+                if (snapshot.data != null) {
+                  paused = snapshot.data!.isPaused;
+                }
+
+                return Container(
+                  color: Colors.grey,
+                  height: 100,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          if (paused) {
+                            SpotifySdk.resume();
+                          } else {
+                            SpotifySdk.pause();
+                          }
+                        },
+                        icon: Icon(
+                          paused ? Icons.play_arrow : Icons.pause,
+                        ),
+                        iconSize: 40,
+                      )
+                    ],
+                  ),
+                );
+              })
+        ],
+      ),
     );
   }
 
-  Future<void> init() async {
-    await getAccessToken();
-    await getUser();
-    await getRecommendations();
-    //get recomended songs
-    setState(() {});
-  }
-
-  Future<void> getAccessToken() async {
-    try {
-      token = await SpotifySdk.getAccessToken(
-          clientId: clientId,
-          redirectUrl: redirectUrl,
-          scope: 'app-remote-control, '
-              'user-modify-playback-state, '
-              'playlist-read-private, '
-              'playlist-modify-public, user-read-currently-playing');
-      print("dobijen token: $token");
-    } on PlatformException catch (e) {
-      print("Error: ${e.code} ${e.message}");
-    } on MissingPluginException {
-      print("Not implemented exception");
-    }
-  }
-
-  Future<void> getUser() async {
-    var response = await http.get(Uri.https("api.spotify.com", "v1/me"),
-        headers: {"Authorization": "Bearer $token"});
-
-    user = User.fromJason(jsonDecode(response.body));
-  }
-
-  Future<void> getRecommendations() async {
-    var response = await http.get(
-        Uri.https("api.spotify.com", "v1/recommendations", {
-          "limit": "10",
-          "market": "ES",
-          "seed_artists": "4NHQUGzhtTLFvgF5SZesLK",
-          "seed_genres": "classical,country",
-          "seed_tracks": "0c6xIDDpzE81m2q797ordA"
-        }),
-        headers: {"Authorization": "Bearer $token"});
-    print(response.body);
+  Future<void> init(AppState appState) async {
+    await appState.getAccessToken();
+    await appState.getUser();
   }
 }

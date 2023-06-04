@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:spotify2/AppState.dart';
 import 'package:spotify2/Pages/HomePage.dart';
 import 'package:spotify2/Pages/LoginPage.dart';
 import 'package:spotify_sdk/models/connection_status.dart';
 import 'package:spotify_sdk/spotify_sdk.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -18,21 +20,26 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: StreamBuilder<ConnectionStatus>(
-        stream: SpotifySdk.subscribeConnectionStatus(),
-        builder: (context, snapshot) {
-          var data = snapshot.data;
-          if (data == null) {
-            return LoginPage();
-          }
-          if (data.connected == false) {
-            return LoginPage();
-          }
+    return ChangeNotifierProvider(
+      create: (context) {
+        return AppState();
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: StreamBuilder<ConnectionStatus>(
+          stream: SpotifySdk.subscribeConnectionStatus(),
+          builder: (context, snapshot) {
+            var data = snapshot.data;
+            if (data == null) {
+              return LoginPage();
+            }
+            if (data.connected == false) {
+              return LoginPage();
+            }
 
-          return HomePage();
-        },
+            return HomePage();
+          },
+        ),
       ),
     );
   }
